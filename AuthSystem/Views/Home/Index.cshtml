@@ -1,1 +1,154 @@
-﻿
+﻿<style>
+
+    @@import "https://unpkg.com/open-props" layer(design.system);
+    @@import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
+    @@import "https://unpkg.com/open-props/theme.light.switch.min.css" layer(demo.theme);
+    @@import "https://unpkg.com/open-props/theme.dark.switch.min.css" layer(demo.theme);
+
+@@layer demo {
+        .taglist{
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--size-2);
+    max-inline-size: var(--size-content-2);
+    
+    > legend {
+      height:0;
+      width:0;
+      overflow:clip;
+    }
+    
+    > div {
+      display: grid;
+      align-items: center;
+      grid-auto-flow: column;
+      grid-template-columns: auto 1fr;
+      
+      > * {
+        grid-area: 1/1;
+      }
+      
+      > label {
+        padding-inline: var(--size-3);
+        padding-block: var(--size-1);
+        background: white;
+        border-radius: var(--radius-2);
+        cursor: pointer;
+      
+        .dark & {
+          background: var(--surface-2);
+        }
+      }
+      
+      > input {
+        appearance: none;
+        background: none;
+        border: none;
+        inline-size: 100%;
+        block-size: 100%;
+      
+        &:checked ~ label {
+          background-color: var(--link);
+          color: var(--surface-1);
+        }
+      
+        &:not(:checked):is(:focus-within, :hover) ~ label {
+          color: var(--link);
+        }
+      }
+    }
+  }
+}
+
+@@layer demo.support {
+  
+  .dark, .light {
+    color: var(--text-1);
+    background: var(--surface-1);
+    gap: var(--size-5);
+    padding-inline: var(--size-2);
+    padding-block: var(--size-5);
+    
+    > div {
+      display: grid;
+      gap: 1ch;
+      
+      > p {
+        font-weight: var(--font-weight-6);
+      }
+    }
+  }
+  
+  .light {
+    background: var(--surface-3);
+  }
+}
+</style>
+
+<div class="card-body">
+    <div class="row justify-content-center">
+        <div class="col-12 my-4">
+            <div class="dark">
+                <div>
+                    <h4>Let's get you all set up</h4>
+
+                    <hr />
+
+                    <fieldset class="taglist">
+                        <p>Do you already have an account with a print on demand provider?</p>
+                        <div>
+                            <input type="radio" name="dark-providerlist-radiox" value="floral" id="dark-providerlist-radio-floralx">
+                            <label for="dark-providerlist-radio-floralx">Yes</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="dark-providerlist-radiox" value="peachy" id="dark-providerlist-radio-peachyx">
+                            <label for="dark-providerlist-radio-peachyx">No</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="dark-providerlist-radiox" value="light" id="dark-providerlist-radio-lightx">
+                            <label for="dark-providerlist-radio-lightx">I am not sure</label>
+                        </div>
+                    </fieldset>
+
+                    <hr />
+
+                    <fieldset class="taglist">
+                        <p>Do you already have an online store or account you want to generate product for?</p>
+                        <div>
+                            <input type="radio" name="dark-taglist-radio" value="floral" id="dark-taglist-radio-floral">
+                            <label for="dark-taglist-radio-floral">Yes</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="dark-taglist-radio" value="peachy" id="dark-taglist-radio-peachy">
+                            <label for="dark-taglist-radio-peachy">No</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="dark-taglist-radio" value="light" id="dark-taglist-radio-light">
+                            <label for="dark-taglist-radio-light">I am not sure</label>
+                        </div>
+                    </fieldset>
+
+                    <hr />
+
+                    <form>
+
+                        <p>Enter your API Key from your POD provider</p>
+                        <div class="group col-12">
+                            <input type="text" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </div>
+
+                        <hr />
+
+                        <button class="btn btn-success" type="submit" style="margin:5px">Let's Rock!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
