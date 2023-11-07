@@ -86,56 +86,111 @@
     background: var(--surface-3);
   }
 }
+
+    #accordion .accordion-content {
+        display: none;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+    #store-accordion .accordion-content {
+        display: none;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+
+
 </style>
 
 <div class="card-body">
     <div class="row justify-content-center">
         <div class="col-12 my-4">
             <div class="dark">
-                <div>
+                <div class="firstSection">
                     <h4>Let's get you all set up</h4>
-
-                    <hr />
 
                     <fieldset class="taglist">
                         <p>Do you already have an account with a print on demand provider?</p>
                         <div>
-                            <input type="radio" name="dark-providerlist-radiox" value="floral" id="dark-providerlist-radio-floralx">
-                            <label for="dark-providerlist-radio-floralx">Yes</label>
+                            <input type="radio" name="provider-account" value="yes" id="has-account">
+                            <label for="has-account">Yes</label>
                         </div>
                         <div>
-                            <input type="radio" name="dark-providerlist-radiox" value="peachy" id="dark-providerlist-radio-peachyx">
-                            <label for="dark-providerlist-radio-peachyx">No</label>
+                            <input type="radio" name="provider-account" value="no" id="no-account">
+                            <label for="no-account">No</label>
                         </div>
                         <div>
-                            <input type="radio" name="dark-providerlist-radiox" value="light" id="dark-providerlist-radio-lightx">
-                            <label for="dark-providerlist-radio-lightx">I am not sure</label>
+                            <input type="radio" name="provider-account" value="not-sure" id="not-sure">
+                            <label for="not-sure">I am not sure</label>
                         </div>
                     </fieldset>
 
-                    <hr />
+                    <div id="accordion">
+                        <div class="accordion-content" id="content-no" style="margin-left:10px">
+                            <p>&nbsp;</p>
+                            <p> <i class="fa fa-arrow-right"></i> A POD service is required to use AutoProduct</p>
+                            <p> <i class="fa fa-arrow-right"></i> This will only take a few minutes to setup</p>
+                            <p> <i class="fa fa-arrow-right"></i> Create a FREE Printify Account <a target="_blank" href="https://www.printify.com">here</a> and then return to this page and select Yes</p>
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="accordion-content" id="content-yes">
+                            <p style="color:lawngreen"><i class="fa fa-check"></i> Great! Let's move on!</p>
+                        </div>
+                    </div>
 
                     <fieldset class="taglist">
                         <p>Do you already have an online store or account you want to generate product for?</p>
                         <div>
-                            <input type="radio" name="dark-taglist-radio" value="floral" id="dark-taglist-radio-floral">
-                            <label for="dark-taglist-radio-floral">Yes</label>
+                            <input type="radio" name="online-store" value="yes" id="online-store-yes">
+                            <label for="online-store-yes">Yes</label>
                         </div>
                         <div>
-                            <input type="radio" name="dark-taglist-radio" value="peachy" id="dark-taglist-radio-peachy">
-                            <label for="dark-taglist-radio-peachy">No</label>
+                            <input type="radio" name="online-store" value="no" id="online-store-no">
+                            <label for="online-store-no">No</label>
                         </div>
                         <div>
-                            <input type="radio" name="dark-taglist-radio" value="light" id="dark-taglist-radio-light">
-                            <label for="dark-taglist-radio-light">I am not sure</label>
+                            <input type="radio" name="online-store" value="not-sure" id="online-store-not-sure">
+                            <label for="online-store-not-sure">I am not sure</label>
                         </div>
                     </fieldset>
 
+                    <div id="store-accordion">
+                        <div class="accordion-content" id="store-content-no">
+                            <p>&nbsp;</p>
+                            <p> <i class="fa fa-arrow-right"></i> A STORE service is required to use AutoProduct</p>
+                            <p> <i class="fa fa-arrow-right"></i> This will only take a few minutes to setup</p>
+                            <p> <i class="fa fa-arrow-right"></i> Create a FREE Etsy Account <a target="_blank" href="https://www.etsy.com">here</a> and then return to this page and select Yes</p>
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="accordion-content" id="store-content-yes">
+                            <p style="color:lawngreen"><i class="fa fa-check"></i> Great! Let's move on!</p>
+                        </div>
+                    </div>
+
+                    <!-- Add the button but keep it hidden initially -->
+                    <button id="continue-button" class="btn btn-success" type="button" style="display:none; margin-top:20px;">Continue</button>
+
+                    <!-- This is the final setup content, initially hidden -->
+                    
+                </div>
+                <div id="final-setup" style="display:none;">
+                    <h3>We are almost done!</h3>
+                    <p style="margin-top:-5px">1. Log into your POD provider and click on Account > Connections</p>
+                    <p style="margin-top:-15px">2. Create a API Key and copy</p>
+                    <p style="margin-top:-15px">3. Ask Printify Support for your store id</p>
                     <hr />
 
                     <form>
 
-                        <p>Enter your API Key from your POD provider</p>
+                        <p>POD API Key</p>
+                        <div class="group col-12">
+                            <input type="text" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <p>&nbsp;</p>
+                        <p>Store ID</p>
                         <div class="group col-12">
                             <input type="text" required>
                             <span class="highlight"></span>
@@ -152,3 +207,61 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('input[type=radio][name=provider-account]').change(function () {
+            if (this.value == 'no' || this.value == 'not-sure') {
+                $('#content-no').slideDown();
+                $('#content-yes').slideUp();
+            } else if (this.value == 'yes') {
+                $('#content-yes').slideDown();
+                $('#content-no').slideUp();
+            }
+        });
+
+        $('input[type=radio][name=online-store]').change(function () {
+            if (this.value == 'no' || this.value == 'not-sure') {
+                $('#store-content-no').slideDown();
+                $('#store-content-yes').slideUp();
+            } else if (this.value == 'yes') {
+                $('#store-content-yes').slideDown();
+                $('#store-content-no').slideUp();
+            }
+        });
+
+        function checkStatus() {
+            var providerYesSelected = $('input[name="provider-account"]:checked').val() === 'yes';
+            var onlineStoreYesSelected = $('input[name="online-store"]:checked').val() === 'yes';
+            // Show the continue button if both yes options are selected
+            if (providerYesSelected && onlineStoreYesSelected) {
+                $('#continue-button').show();
+            } else {
+                $('#continue-button').hide();
+            }
+        }
+
+        // Event listeners for the radio buttons
+        $('input[type=radio][name=provider-account], input[type=radio][name=online-store]').change(function () {
+            // Existing code to slide up/down the accordion content
+            // ...
+
+            // Check status whenever any radio button changes
+            checkStatus();
+        });
+
+        // Continue button click event
+        $('#continue-button').click(function () {
+            // Hide all the previous contents
+            $('.firstSection').hide();
+
+            // Show the final setup steps
+            $('#final-setup').show();
+        });
+
+        // Initially hide the continue button and final setup content
+        $('#continue-button').hide();
+        $('#final-setup').hide();
+
+    });
+
+</script>

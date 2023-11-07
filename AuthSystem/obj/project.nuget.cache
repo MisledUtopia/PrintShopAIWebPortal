@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S1m+A+m9b41Rw6j2dd6YmOmxcjkSd/gFlAPuxnpC+pb/U3wppKfxMzXDUT3COe2sJ35QpMSkFCWy1W+XjIE/wQ==",
+  "dgSpecHash": "6s33BcWdTMiio+kORO8DOwg3kQkqQ5hKlz1n+1a+93vMfKiYHqRaHbi2xEnGOx+/Ap8l6iVGQ/nw7vCzweHHyQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
+  "projectFilePath": "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\misle\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\misle\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

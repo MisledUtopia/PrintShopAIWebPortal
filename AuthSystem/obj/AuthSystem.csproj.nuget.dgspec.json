@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj": {}
+    "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj": {
+    "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
+        "projectUniqueName": "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
         "projectName": "AuthSystem",
-        "projectPath": "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
+        "projectPath": "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\AuthSystem.csproj",
         "packagesPath": "C:\\Users\\misle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\misle\\Source\\Repos\\PrintShopAIWebPortal\\AuthSystem\\obj\\",
+        "outputPath": "C:\\Users\\misle\\source\\repos\\PrintShopAIWebPortal\\AuthSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
