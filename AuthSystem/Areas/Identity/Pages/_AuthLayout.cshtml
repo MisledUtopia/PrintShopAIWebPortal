@@ -2,6 +2,8 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/CSSRulePlugin.min.js"></script>
 
 <style>
     @@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
@@ -212,7 +214,598 @@
         display:none;
     }
 
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: #171717;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #171717;
+        width: 100%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  font-size: 16px;
+  font-family: "Oswald", sans-serif;
+  --color-1: hsl(236, 74%, 55%);
+  --color-2: hsl(0, 0%, 95%);
+  --color-21: hsla(0, 0%, 95%, 0.5);
+  --color-3: hsl(0, 0%, 5%);
+  --color-4: hsl(0, 0%, 15%);
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.slider-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  border: 1px white solid;
+  padding: 1rem;
+  /* background-color: black; */
+}
+
+.title-of-slider {
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+  width: max-content;
+  align-self: flex-start;
+  color: var(--color-2);
+  font-size: clamp(1rem, 4.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.title-of-slider > span {
+  font-weight: 700;
+}
+
+#image-container {
+  display: flex;
+  gap: 0.5rem;
+   background-color: black; 
+  width: 100%;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.model-images {
+  flex: none;
+  width: 30%;
+  translate: calc(-100% - 0.5rem);
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: 2.5rem 2.5rem auto 2.5rem 2.5rem;
+  column-gap: 0.1rem;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.button-container > button {
+  position: relative;
+  border: 0.1rem var(--color-2) solid;
+  border-radius: 50%;
+  width: 2.5rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#left-arrow {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#right-arrow {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#right-arrow:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#left-arrow:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+
+  height: 100%;
+  border-radius: 50%;
+}
+
+.button-container button > svg {
+  width: 25%;
+  height: auto;
+}
+
+#right-arrow svg {
+  transform: rotate(180deg);
+}
+
+#progress-bar-container {
+  position: relative;
+  grid-column: 3 / 6;
+  align-self: center;
+  width: 90%;
+  height: 0.2rem;
+  justify-self: center;
+  border-radius: 0.2rem;
+  background-color: var(--color-21);
+}
+
+#progress-bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-2);
+  transform-origin: left;
+}
+
+@@media (max-width: 45em) {
+  #left-arrow {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #right-arrow {
+    grid-column: 5;
+    grid-row: 1;
+  }
+  #progress-bar-container {
+    position: relative;
+    grid-column: 2 / 5;
+    align-self: center;
+    width: 90%;
+    height: 0.2rem;
+    justify-self: center;
+    border-radius: 0.2rem;
+    background-color: var(--color-21);
+  }
+}
+
+    @@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+    *,
+    *:after,
+    *:before {
+        box-sizing: border-box;
+    }
+
+    /*body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8f9;
+    }*/
+
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        user-select: none;
+        & > *
+
+    {
+        margin: .5rem 0.5rem;
+    }
+
+    }
+
+
+
+    .checkbox-group-legend {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #9c9c9c;
+        text-align: center;
+        line-height: 1.125;
+        margin-bottom: 1.25rem;
+    }
+
+    .checkbox-input {
+        // Code to hide the input clip: rect(0 0 0 0);
+        clip-path: inset(100%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+        &:checked + .checkbox-tile
+
+    {
+        border-color: #2260ff;
+        box-shadow: 0 5px 10px rgba(#000, 0.1);
+        color: #2260ff;
+        &:before
+
+    {
+        transform: scale(1);
+        opacity: 1;
+        background-color: #2260ff;
+        border-color: #2260ff;
+    }
+
+    .checkbox-icon, .checkbox-label {
+        color: #2260ff;
+    }
+
+    }
+
+    &:focus + .checkbox-tile {
+        border-color: #2260ff;
+        box-shadow: 0 5px 10px rgba(#000, 0.1), 0 0 0 4px #b5c9fc;
+        &:before
+
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    }
+    }
+
+    .checkbox-tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 7rem;
+        min-height: 3rem;
+        border-radius: 0.5rem;
+        border: 2px solid #b5bfd9;
+        background-color: #fff;
+        box-shadow: 0 5px 10px rgba(#000, 0.1);
+        transition: 0.15s ease;
+        cursor: pointer;
+        position: relative;
+        &:before
+
+    {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid #b5bfd9;
+        background-color: #fff;
+        border-radius: 50%;
+        top: 0.25rem;
+        left: 0.25rem;
+        opacity: 0;
+        transform: scale(0);
+        transition: 0.25s ease;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
+        background-size: 12px;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+
+    &:hover {
+        border-color: #2260ff;
+        &:before
+
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    }
+    }
+
+    .checkbox-icon {
+        transition: .375s ease;
+        color: #494949;
+        svg
+
+    {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    }
+
+    .checkbox-label {
+        color: #707070;
+        transition: .375s ease;
+        text-align: center;
+    }
 </style>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" >
+        
+        <div style="width:90%; max-width:800px; margin:10px auto;">
+            <h1 style="color:ghostwhite">Lets make some products</h1>
+            <p style="color:ghostwhite"> > Only 3 decisions between you and a store full of products.</p>
+            <p style="color:ghostwhite"> > The full site will have more options, but this will give you an idea of it's abilities.</p>
+            <fieldset class="checkbox-group">
+                <legend class="checkbox-group-legend">What kind of products?</legend>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">TShirt</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Blanket</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">PhoneCase</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">MousePad</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Notebook</span>
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+            <fieldset class="checkbox-group">
+                <legend class="checkbox-group-legend">What do you want on them?</legend>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Scary</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Cool</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Cute</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Sexy</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Apocalyptic</span>
+                        </span>
+                    </label>
+                </div>
+               
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Sci-fi</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Zodiac</span>
+                        </span>
+                    </label>
+                </div>
+               
+                <!-- Continue adding the rest of the checkboxes for the topics list -->
+            </fieldset>
+            <fieldset class="checkbox-group">
+                <legend class="checkbox-group-legend">What styles do you want?</legend>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Colorful</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Cinematic</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Intricate</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Shiny</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Masterpiece</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Concept Art</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" />
+                        <span class="checkbox-tile">
+                            <span class="checkbox-icon"></span>
+                            <span class="checkbox-label">Smooth</span>
+                        </span>
+                    </label>
+                </div>
+               
+            </fieldset>
+            <button id="letsGo" class="btn btn-primary">Let's Go</button>
+            <p>&nbsp;</p>
+            <p id="generatedImageText" style="color:palegreen;display:none">This could be on your store right now... IF you used PixelPressAI</p>
+            <img id="generatedImage" style="display:none; width:100%;max-width:800px;" src="https://b.l3n.co/i/9obBF2.jpeg" />
+        </div>
+        <section class="slider-container">
+            <h1 class="title-of-slider"> Created with<span class="bolden"> PixelPress AI</span></h1>
+            <div id="image-container">
+                <img class="model-images" src="https://c.l3n.co/i/9obqp9.webp" alt="shirt-modeler-1">
+                <img class="model-images" src="https://b.l3n.co/i/9obBF2.jpeg" alt="shirt-modeler-2">
+                <img class="model-images" src="https://a.l3n.co/i/9ob4Y5.webp" alt="shirt-modeler-3">
+                <img class="model-images" src="https://c.l3n.co/i/9obp2z.webp" alt="shirt-modeler-4">
+            </div>
+            <div class="button-container">
+                <button class="direction-button" id="left-arrow">
+                    <svg fill="#fff" height="800px" width="800px" version="1.1"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                    <path id="XMLID_92_"
+                          d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001
+            	l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996
+            	C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z" />
+                </svg>
+                </button>
+
+                <span id="progress-bar-container"><span id="progress-bar"></span></span>
+
+                <button class="direction-button" id="right-arrow">
+                    <svg fill="#fff" height="800px" width="800px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         viewBox="0 0 330 330" xml:space="preserve">
+                    <path id="XMLID_92_"
+                          d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001
+                            	l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996
+                            	C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z" />
+                </svg>
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
+
 
 <div class="contentBody">
     <div class="content">
@@ -225,7 +818,7 @@
                 <div class="aurora__item"></div>
             </div>
         </h1>
-        <p class="subtitle">SEE FOR YOURSELF <i class="fa fa-video"></i> &nbsp; | &nbsp;TRY OUT THE DEMO <i class="fa fa-gamepad"></i></p>
+        <p class="subtitle">SEE FOR YOURSELF -> <i class="fa fa-video"></i> &nbsp; | &nbsp;TRY OUT THE DEMO -> <i id="myParagraph" class="fa fa-gamepad"></i></p>
     </div>
 </div>
 
@@ -261,6 +854,185 @@
 @section Scripts{
     @await RenderSectionAsync("Scripts", required: false)
     <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+  // Listen for a click event on the 'Let's Go' button
+  document.getElementById('letsGo').addEventListener('click', function() {
+    // Select the elements you want to show
+    var image = document.getElementById('generatedImage');
+    var text = document.getElementById('generatedImageText');
+
+    // Change their 'display' style to 'block' to show them
+    image.style.display = 'block';
+    text.style.display = 'block';
+  });
+});
+
+
+        const leftArrow = document.getElementById("left-arrow");
+        const rightArrow = document.getElementById("right-arrow");
+
+        const imagesContainer = document.getElementById("image-container");
+        let images = document.querySelectorAll(".model-images");
+
+        // This was done incase the user wanted to start first by pressing the left button
+        let cloneLastImage = images[images.length - 1].cloneNode(true);
+        imagesContainer.prepend(cloneLastImage);
+
+
+        // For the progressBar
+        const imageCount = images.length;
+        let currentImage = 0;
+
+        let firstImageIndexValue = 0;
+        let currentFirstImage = images[0];
+        let currentLastImage = images[images.length - 1];
+
+
+        // GSAP Animations
+        function buttonPressedAnimation(buttonId) {
+            let rule = CSSRulePlugin.getRule(buttonId);
+            let tl = gsap.timeline();
+
+            gsap.set(rule, {
+                cssRule: {
+                    scale: 1,
+                    border: "solid 0.1rem #fff",
+                    opacity: 0,
+                },
+            });
+
+            tl.to(rule, {
+                duration: .2,
+                cssRule: {
+                    scale: 1.5,
+                    opacity: 1,
+                },
+            });
+
+            tl.to(rule, {
+                duration: 0.2,
+                cssRule: {
+                    scale: 3,
+                    opacity: 0,
+                },
+                ease: "power2.out",
+            });
+
+            tl.to(rule, {
+                duration: 0.2,
+                cssRule: {
+                    scale: 1,
+                },
+                ease: "power2.in",
+            });
+        }
+
+        function staggerImageAnimation(fromValue, toValue, direction) {
+            gsap.fromTo(
+                ".model-images",
+                {
+                    translate: fromValue,
+                },
+                {
+                    translate: toValue,
+                    stagger: {
+                        from: direction,
+                        amount: 0.3,
+                    },
+                    ease: "power2.inOut",
+                }
+            );
+        }
+
+        function progressBarAnimation() {
+            gsap.to("#progress-bar", {
+                scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
+                duration: 0.3 * ((imageCount - 1) / 2),
+                ease: "power2.inOut",
+            });
+        }
+
+        gsap.set("#progress-bar", {
+            scaleX: `${1 / imageCount + currentImage / imageCount}`,
+        });
+
+        // Gsap animation ends
+
+        // Image Placements
+        function moveImagesTotheLeft() {
+            images = document.querySelectorAll(".model-images");
+            let cloneFirstImage = images[1].cloneNode(true);
+            imagesContainer.append(cloneFirstImage);
+
+            let fromValue = `0`;
+            let toValue = `calc(-100% - 0.5rem) `;
+
+            staggerImageAnimation(fromValue, toValue, "start");
+            images[0].remove();
+        }
+
+        function moveImagesTotheRight() {
+            images = document.querySelectorAll(".model-images");
+            let cloneLastImage = images[images.length - 2].cloneNode(true);
+
+            imagesContainer.prepend(cloneLastImage);
+            let fromValue = `calc(-200% - 1rem)`;
+            let toValue = `calc(-100% - 0.5rem) `;
+            staggerImageAnimation(fromValue, toValue, "end");
+            images[images.length - 1].remove();
+        }
+        // Image Placements Ends
+
+        // Event Listeners
+        leftArrow.addEventListener("click", () => {
+            moveImagesTotheRight();
+            buttonPressedAnimation("#left-arrow:before");
+            gsap.set("#progress-bar", {
+                scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
+            });
+            currentImage = (currentImage - 1) % imageCount;
+
+            if (currentImage < 0) {
+                currentImage = 3;
+            }
+
+            progressBarAnimation();
+        });
+
+        rightArrow.addEventListener("click", () => {
+            moveImagesTotheLeft();
+            buttonPressedAnimation("#right-arrow:before");
+            gsap.set("#progress-bar", {
+                scaleX: `${1 / imageCount + (currentImage % imageCount) / imageCount}`,
+            });
+
+            currentImage = (currentImage + 1) % imageCount;
+
+            progressBarAnimation();
+        });
+
+
+        $(document).ready(function () {
+            // When the user clicks on the paragraph, open the modal
+            $('#myParagraph').on('click', function () {
+                $('#myModal').css('display', 'block');
+            });
+
+            // When the user clicks on <span> (x), close the modal
+            $('.close').on('click', function () {
+                $('#myModal').css('display', 'none');
+            });
+
+            // When the user clicks anywhere outside of the modal, close it
+            $(window).on('click', function (event) {
+                if ($(event.target).is('#myModal')) {
+                    $('#myModal').css('display', 'none');
+                }
+            });
+        });
+
+
         $(function () {
             const currentPage = location.pathname;
             $('.nav-tabs li a').each(function () {
@@ -274,5 +1046,6 @@
     </script>
 
     <script src="https://kit.fontawesome.com/f1387aae0e.js" crossorigin="anonymous"></script>
+
 
 }
